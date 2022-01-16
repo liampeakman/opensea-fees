@@ -40,6 +40,9 @@ function App() {
       if (currentAccount !== ''){
         return
       }
+      // Check if there is a wallet in the url first 
+
+
 
 
       // Check if we're authorized to access the user's wallet
@@ -51,8 +54,18 @@ function App() {
         console.log("Found an authorized account: ", account)
         setCurrentAccount(account)
 
-        // Check if there is a wallet in the url first 
+        if (window.location.pathname !== '/'){
+          const url =  await window.location.pathname
+          const input = await url.substring(1)
+          console.log('Found an address from input', input)
+          setCurrentAccountUrl(input) 
+          return input  
+          
+        } else{
+          return account
+        }
         
+      } else {
         if (window.location.pathname !== '/'){
           const url =  await window.location.pathname
           const input = await url.substring(1)
@@ -63,11 +76,6 @@ function App() {
         } else{
           console.log("No authorized account found. Connect your wallet.")
         }
-
-        return account
-      } else {
-
-        
         
       }
     } catch (error){
