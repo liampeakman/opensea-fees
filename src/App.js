@@ -11,7 +11,7 @@ function App() {
   console.warn = () => {};
 
   const [currentAccount, setCurrentAccount] = useState("")
-  const [currentAccountString, setCurrentAccountString] = useState("")
+  const [currentAccountUrl, setCurrentAccountUrl] = useState("")
   // const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [amountSold, setAmountSold] = useState(0)
@@ -41,6 +41,7 @@ function App() {
         return
       }
 
+
       // Check if we're authorized to access the user's wallet
 
       const accounts = await ethereum.request({ method: "eth_accounts" })
@@ -49,22 +50,24 @@ function App() {
         const account = accounts[0]
         console.log("Found an authorized account: ", account)
         setCurrentAccount(account)
-        setCurrentAccountString(account)
+
+        // Check if there is a wallet in the url first 
+        
+        if (window.location.pathname !== '/'){
+          const url =  await window.location.pathname
+          const input = await url.substring(1)
+          console.log('Found an address from input', input)
+          setCurrentAccountUrl(input) 
+          return input  
+          
+        } else{
+          console.log("No authorized account found. Connect your wallet.")
+        }
+
         return account
       } else {
 
-        // Check if there is a wallet in the url 
         
-        if (window.location.pathname !== '/'){
-         const url =  await window.location.pathname
-         const input = await url.substring(1)
-         console.log('Found an address from input', input)
-         setCurrentAccount(input)   
-         return input  
-         
-        } else{
-         console.log("No authorized account found. Connect your wallet.")
-        }
         
       }
     } catch (error){
@@ -198,26 +201,23 @@ function App() {
   
   return (
     <main>
-      <button className="connectBtn" onClick={connectWallet}>{currentAccountString === '' ? 'Connect Wallet' : currentAccountString.substring(0, 8)+'...'}</button>
+      <button className="connectBtn" onClick={connectWallet}>{currentAccount === '' ? 'Connect Wallet' : currentAccount.substring(0, 8)+'...'}</button>
 
-      {currentAccount ==='' && (
+      {(currentAccount === '' && currentAccountUrl === '') && (
         <div className="content">
           <h1>Connect your wallet to the site or add it the url like this:</h1>
-          <p>osfees.rip/0x76B77F865Ccd14F2Ad4a8CD5c85e19170A1cb50b</p>
+          <p>osfees.rip/0xd6a984153acb6c9e2d788f08c2465a1358bb89a7</p>
         </div>      
       )}
 
-      {currentAccount !=='' && (
-        <div>
-        {loading && (
-           <div className="content">
-           <h1>Doing some API magic 🎩🐇 Please hold... </h1>
-           <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.</p>
-          
-            </div>
-        )}
-       </div>
+
+      {loading && (currentAccount !== '' || currentAccountUrl !== '') && (
+          <div className="content">
+          <h1>Doing some API magic 🎩🐇 Please hold... </h1>
+          <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.</p>
+          </div>
       )}
+   
 
       {!loading && (
         <div className="content">
