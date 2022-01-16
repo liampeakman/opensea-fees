@@ -222,7 +222,7 @@ function App() {
       {loading && (currentAccount !== '' || currentAccountUrl !== '') && (
           <div className="content">
           <h1>Doing some API magic 🎩🐇 Please hold... </h1>
-          <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.<br>(Check the console for a log of transactions.)</br></p>
+          <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.<br></br>(Check the console for a log of transactions.)</p>
           </div>
       )}
    
