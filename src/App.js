@@ -11,6 +11,7 @@ function App() {
   console.warn = () => {};
 
   const [currentAccount, setCurrentAccount] = useState("")
+  const [currentAccountString, setCurrentAccountString] = useState("")
   // const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [amountSold, setAmountSold] = useState(0)
@@ -21,6 +22,7 @@ function App() {
   const hashes = []
   let feeTotal = 0;
   let amount = 0;
+
 
   
   //Make sure we have access to window.ethereum
@@ -35,6 +37,10 @@ function App() {
         return;
       } 
 
+      if (currentAccount !== ''){
+        return
+      }
+
       // Check if we're authorized to access the user's wallet
 
       const accounts = await ethereum.request({ method: "eth_accounts" })
@@ -43,6 +49,7 @@ function App() {
         const account = accounts[0]
         console.log("Found an authorized account: ", account)
         setCurrentAccount(account)
+        setCurrentAccountString(account)
         return account
       } else {
 
@@ -81,7 +88,7 @@ function App() {
 
       console.log("Connected", accounts[0])
       setCurrentAccount(accounts[0])
-      // window.location.reload()
+      window.location.reload()
 
     } catch (error){
       console.log(error)
@@ -191,7 +198,7 @@ function App() {
   
   return (
     <main>
-      <button className="connectBtn" onClick={connectWallet}>Connect Wallet</button>
+      <button className="connectBtn" onClick={connectWallet}>{currentAccountString === '' ? 'Connect Wallet' : currentAccountString.substring(0, 8)+'...'}</button>
 
       {currentAccount ==='' && (
         <div className="content">
