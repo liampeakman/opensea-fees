@@ -230,7 +230,7 @@ function App() {
 
       {(currentAccount === '' && currentAccountUrl === '') && (
         <div className="content">
-          <h1>Connect your wallet to the site or paste it here:</h1>
+          <h1>Connect your wallet to the site or submit it below.</h1>
           <div className="form">
             <input value={input} placeholder="0x00000..." onInput={e => setInput(e.target.value)}/>
             <button type="submit" onClick={() => setURL()}>➜</button>
@@ -242,7 +242,7 @@ function App() {
       {loading && (currentAccount !== '' || currentAccountUrl !== '') && (
           <div className="content">
           <h1>Doing some API magic 🎩🐇 Please hold... </h1>
-          <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.<br></br>(Check the console for a log of transactions.)</p>
+          <p>The time this takes is based off of the amount of sales you've had and the amount of people using this right now.</p>
           </div>
       )}
    
