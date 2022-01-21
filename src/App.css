@@ -45,13 +45,12 @@ main {
 .content p{
   margin:auto;
   margin-top:2rem;
-  font-size:1.6rem;
+  font-size:min(1.6rem);
   max-width:50ch;
 }
 
 
 .connectBtn{
-
   color:#fff;
   padding: 1.2rem 2rem;
   border-radius:0.4rem;
@@ -64,6 +63,42 @@ main {
   cursor: pointer;
   align-self: end;
 
+}
+
+.form {
+  border-radius: 5rem;
+  padding:1rem 1rem 1rem 3rem;
+  border:solid 1px black;
+  display: flex;
+  max-width: 40rem;
+  margin:2rem auto;
+  justify-content: space-between
+
+}
+
+.form input {
+  border:none;
+  background: none;
+  font-size:1.6rem;
+  width:100%;
+  outline: none;
+}
+
+.form button {
+  background-color:rgb(32, 129, 226);
+  border:none;
+  width:4rem;
+  height:3rem;
+  color:#fff;
+  border-radius: 10rem;
+  font-size:2rem;
+  transition:0.3s ease-in; 
+  cursor: pointer;
+}
+.form button:hover {
+  transition:0.3s ease-in; 
+  background-color: #1868B7;
+ 
 }
 
 .connectBtn:hover{

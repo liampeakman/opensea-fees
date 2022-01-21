@@ -12,6 +12,7 @@ function App() {
 
   const [currentAccount, setCurrentAccount] = useState("")
   const [currentAccountUrl, setCurrentAccountUrl] = useState("")
+  const [input, setInput] = useState("")
   // const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [amountSold, setAmountSold] = useState(0)
@@ -156,6 +157,17 @@ function App() {
     }
   }
 
+  const setURL = async () => {
+    try {
+      const URL = window.location.pathname+input
+      console.log(URL);
+      window.location.replace(URL);
+
+    } catch(error){
+      console.log(error);
+    }
+  }
+
 
   // Runs out function when the page loads
 
@@ -209,12 +221,20 @@ function App() {
   
   return (
     <main>
-      <button className="connectBtn" onClick={connectWallet}>{currentAccount === '' ? 'Connect Wallet' : currentAccount.substring(0, 8)+'...'}</button>
+          
+
+      {!(/Mobi/.test(navigator.userAgent)) && (
+        <button className="connectBtn" onClick={connectWallet}>{currentAccount === '' ? 'Connect Wallet' : currentAccount.substring(0, 8)+'...'}</button>    
+      )}
+
 
       {(currentAccount === '' && currentAccountUrl === '') && (
         <div className="content">
-          <h1>Connect your wallet to the site or add it the url like this:</h1>
-          <p>osfees.rip/0xd6a984153acb6c9e2d788f08c2465a1358bb89a7</p>
+          <h1>Connect your wallet to the site or paste it here:</h1>
+          <div className="form">
+            <input value={input} placeholder="0x00000..." onInput={e => setInput(e.target.value)}/>
+            <button type="submit" onClick={() => setURL()}>➜</button>
+          </div>
         </div>      
       )}
 
