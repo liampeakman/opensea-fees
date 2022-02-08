@@ -263,9 +263,7 @@ function App() {
       )}
       
       <footer>
-      <p>Inspired by <a href="https://www.fees.wtf" target="_blank" rel="noreferrer" >fees.wtf</a></p>
-      <p>Powered by <a href="https://etherscan.io/apis" target="_blank" rel="noreferrer" >Etherscan</a> and <a href="https://www.coingecko.com/en/api" target="_blank" rel="noreferrer" >CoinGecko</a> APIs</p>
-      <p>Made with 🌐🎩 by <a href="https://www.twitter.com/0xPeak" target="_blank" rel="noreferrer" >@0xPeak</a></p>
+      <p>Powered by <a href="https://etherscan.io/apis" target="_blank" rel="noreferrer" >Etherscan</a> and <a href="https://www.coingecko.com/en/api" target="_blank" rel="noreferrer" >CoinGecko</a> APIs 🌐</p>
       </footer>
 
     </main>
